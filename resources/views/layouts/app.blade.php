@@ -33,28 +33,33 @@
         x-cloak
     >
         <div class="min-h-screen text-gray-900 bg-gray-100 dark:bg-dark-eval-0 dark:text-gray-200">
-            <!-- Sidebar -->
-            <x-sidebar.sidebar />
+            @auth
+                <!-- Sidebar -->
+                <x-sidebar.sidebar />
 
-            <!-- Page Wrapper -->
-            <div
-                class="flex flex-col min-h-screen"
-                :class="{
-                    'lg:ml-64': isSidebarOpen,
-                    'md:ml-16': !isSidebarOpen
-                }"
-                style="transition-property: margin; transition-duration: 150ms;"
-            >
-
+                <!-- Page Wrapper -->
+                <div
+                    class="flex flex-col min-h-screen"
+                    :class="{
+                        'lg:ml-64': isSidebarOpen,
+                        'md:ml-16': !isSidebarOpen
+                    }"
+                    style="transition-property: margin; transition-duration: 150ms;"
+                >
+            @endauth
+            @if (isset($header))
                 <!-- Navbar -->
                 <x-navbar />
 
-                <!-- Page Heading -->
-                <header>
-                    <div class="p-4 sm:p-6">
-                        {{ $header }}
-                    </div>
-                </header>
+
+                    <!-- Page Heading -->
+                    <header>
+                        <div class="p-4 sm:p-6">
+                            {{ $header }}
+                        </div>
+                    </header>
+            @endif
+
 
                 <!-- Page Content -->
                 <main class="px-4 sm:px-6 flex-1">

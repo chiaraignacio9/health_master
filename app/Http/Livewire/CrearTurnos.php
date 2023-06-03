@@ -54,7 +54,11 @@ class CrearTurnos extends Component
 
     public function actualizarDoctores()
     {
-        $response = DB::select('SELECT * FROM doctores INNER JOIN users ON users.rol_id = 2 WHERE doctores.especialidad_id = ?', [$this->especialidadSeleccionada]);
+        $response = DB::select(
+            'SELECT doctores.*, users.*, doctores.id AS doctor_id FROM doctores INNER JOIN users ON doctores.user_id = users.id
+        WHERE  users.rol_id = 2 AND doctores.especialidad_id = ?',
+            [$this->especialidadSeleccionada]
+        );
         $this->doctores = json_encode($response);
     }
 }

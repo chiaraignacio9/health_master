@@ -31,9 +31,10 @@
                     @if ($doctores)
                         @php
                             $doctoresDatos = json_decode($doctores, true);
+                            var_dump($doctoresDatos);
                         @endphp
                         @foreach ($doctoresDatos as $doctor)
-                            <option value="{{$doctor['id']}}">{{$doctor['nombre'] . ' ' . $doctor['apellido']}}</option>
+                            <option value="{{$doctor['doctor_id']}}">{{ $doctor['nombre'] . ' ' . $doctor['apellido']}}</option>
                         @endforeach
                     @endif
                     </select>
@@ -44,7 +45,7 @@
                 @php
                     $turnosDatos = json_decode($turnos, true);
                 @endphp
-                @foreach ($turnosDatos as $turno)
+                @forelse ($turnosDatos as $turno)
                 <div class="p-6 text-gray-900 border-b md:flex md:justify-between md:items-center">
                     <div class="leading-10">
                         <a href="" class="text-base font-bold">
@@ -83,9 +84,10 @@
                             </a>
                         @endif
                     @endif
-
                 </div>
-                @endforeach
+                @empty
+                    <p class="text-red-500 text-sm">No hay turnos disponibles para el doctor seleccionado</p>
+                @endforelse
             @endif
     </div>
 </div>

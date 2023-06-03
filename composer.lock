@@ -4,8 +4,136 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "97de9fadb213a7402d187439d6d9d920",
+    "content-hash": "2c8d270c01827fa14271fe2710b9ad3a",
     "packages": [
+        {
+            "name": "amendozaaguiar/laravel-lat-es",
+            "version": "2.4.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/amendozaaguiar/laravel-lat-es.git",
+                "reference": "760184805992a43b70d3c53bdfbe4dc987a74a43"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/amendozaaguiar/laravel-lat-es/zipball/760184805992a43b70d3c53bdfbe4dc987a74a43",
+                "reference": "760184805992a43b70d3c53bdfbe4dc987a74a43",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/console": ">=5.4.0",
+                "illuminate/support": ">=5.4.0",
+                "php": ">=5.6"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Amendozaaguiar\\Laravellates\\LaravelLatEsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Amendozaaguiar\\Laravellates\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Anderson Mendoza",
+                    "homepage": "https://amendozaaguiar.dev",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Paquete de traducciones en español para Laravel 9, 10. Este paquete te agrega a tu proyecto los ficheros de traducciones en español que Laravel 9, 10 trae por defecto.",
+            "homepage": "https://github.com/amendozaaguiar/laravel-lat-es",
+            "keywords": [
+                "Espanol",
+                "laravel",
+                "spanish",
+                "traduccion",
+                "translation"
+            ],
+            "support": {
+                "issues": "https://github.com/amendozaaguiar/laravel-lat-es/issues",
+                "source": "https://github.com/amendozaaguiar/laravel-lat-es/tree/2.4.0"
+            },
+            "time": "2023-02-11T15:07:44+00:00"
+        },
+        {
+            "name": "amendozaaguiar/laraveles-spanish-for-jetstream",
+            "version": "1.7.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/amendozaaguiar/laraveles-spanish-for-jetstream.git",
+                "reference": "89be6c9c32919e53b26903090f27277b01f58f29"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/amendozaaguiar/laraveles-spanish-for-jetstream/zipball/89be6c9c32919e53b26903090f27277b01f58f29",
+                "reference": "89be6c9c32919e53b26903090f27277b01f58f29",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/console": ">=5.4.0",
+                "illuminate/support": ">=5.4.0",
+                "php": ">=5.6"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^3.4|^4.0",
+                "phpunit/phpunit": "^5.6|^6.3|^7.0|^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Laraveles\\Spanish\\SpanishServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laraveles\\Spanish\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Anderson Mendoza"
+                },
+                {
+                    "name": "Israel Ortuño",
+                    "email": "ai.ortuno@gmail.com"
+                },
+                {
+                    "name": "Cesar Garcia",
+                    "email": "cesargb@gmail.com",
+                    "homepage": "https://github.com/cesargb",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Conjunto de traducciones en español para Laravel con Jetstream",
+            "homepage": "https://github.com/amendozaaguiar/laraveles-spanish-for-jetstream",
+            "keywords": [
+                "jetstream",
+                "laravel",
+                "laraveles",
+                "spanish",
+                "traduccion"
+            ],
+            "support": {
+                "source": "https://github.com/amendozaaguiar/laraveles-spanish-for-jetstream/tree/1.7.0"
+            },
+            "abandoned": "https://github.com/amendozaaguiar/laravel-lat-es",
+            "time": "2022-09-13T03:11:12+00:00"
+        },
         {
             "name": "blade-ui-kit/blade-heroicons",
             "version": "1.4.0",

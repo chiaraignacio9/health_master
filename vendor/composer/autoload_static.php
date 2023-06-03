@@ -120,6 +120,7 @@ class ComposerStaticInitc2f1d92dfd207cc38d8e48f5f7414a52
             'League\\Flysystem\\' => 17,
             'League\\Config\\' => 14,
             'League\\CommonMark\\' => 18,
+            'Laraveles\\Spanish\\' => 18,
             'Laravel\\Tinker\\' => 15,
             'Laravel\\SerializableClosure\\' => 28,
             'Laravel\\Sanctum\\' => 16,
@@ -176,6 +177,7 @@ class ComposerStaticInitc2f1d92dfd207cc38d8e48f5f7414a52
         'A' => 
         array (
             'App\\' => 4,
+            'Amendozaaguiar\\Laravellates\\' => 28,
         ),
     );
 
@@ -401,6 +403,10 @@ class ComposerStaticInitc2f1d92dfd207cc38d8e48f5f7414a52
         array (
             0 => __DIR__ . '/..' . '/league/commonmark/src',
         ),
+        'Laraveles\\Spanish\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/amendozaaguiar/laraveles-spanish-for-jetstream/src',
+        ),
         'Laravel\\Tinker\\' => 
         array (
             0 => __DIR__ . '/..' . '/laravel/tinker/src',
@@ -522,6 +528,10 @@ class ComposerStaticInitc2f1d92dfd207cc38d8e48f5f7414a52
             0 => __DIR__ . '/../..' . '/app',
             1 => __DIR__ . '/..' . '/laravel/pint/app',
         ),
+        'Amendozaaguiar\\Laravellates\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/amendozaaguiar/laravel-lat-es/src',
+        ),
     );
 
     public static $prefixesPsr0 = array (
@@ -535,6 +545,8 @@ class ComposerStaticInitc2f1d92dfd207cc38d8e48f5f7414a52
     );
 
     public static $classMap = array (
+        'Amendozaaguiar\\Laravellates\\Commands\\InstallLaravelLatEs' => __DIR__ . '/..' . '/amendozaaguiar/laravel-lat-es/src/Commands/InstallLaravelLatEs.php',
+        'Amendozaaguiar\\Laravellates\\LaravelLatEsServiceProvider' => __DIR__ . '/..' . '/amendozaaguiar/laravel-lat-es/src/LaravelLatEsServiceProvider.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Http\\Controllers\\Auth\\AuthenticatedSessionController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/AuthenticatedSessionController.php',
@@ -547,9 +559,25 @@ class ComposerStaticInitc2f1d92dfd207cc38d8e48f5f7414a52
         'App\\Http\\Controllers\\Auth\\RegisteredUserController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/RegisteredUserController.php',
         'App\\Http\\Controllers\\Auth\\VerifyEmailController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/VerifyEmailController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\DoctoresController' => __DIR__ . '/../..' . '/app/Http/Controllers/DoctoresController.php',
+        'App\\Http\\Controllers\\PacientesController' => __DIR__ . '/../..' . '/app/Http/Controllers/PacientesController.php',
+        'App\\Http\\Controllers\\PrepagasController' => __DIR__ . '/../..' . '/app/Http/Controllers/PrepagasController.php',
         'App\\Http\\Controllers\\ProfileController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProfileController.php',
-        'App\\Http\\Controllers\\RolController' => __DIR__ . '/../..' . '/app/Http/Controllers/RolController.php',
+        'App\\Http\\Controllers\\TurnosController' => __DIR__ . '/../..' . '/app/Http/Controllers/TurnosController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
+        'App\\Http\\Livewire\\AsignarTurnos' => __DIR__ . '/../..' . '/app/Http/Livewire/AsignarTurnos.php',
+        'App\\Http\\Livewire\\CrearDoctor' => __DIR__ . '/../..' . '/app/Http/Livewire/CrearDoctor.php',
+        'App\\Http\\Livewire\\CrearPaciente' => __DIR__ . '/../..' . '/app/Http/Livewire/CrearPaciente.php',
+        'App\\Http\\Livewire\\CrearPrepaga' => __DIR__ . '/../..' . '/app/Http/Livewire/CrearPrepaga.php',
+        'App\\Http\\Livewire\\CrearTurnos' => __DIR__ . '/../..' . '/app/Http/Livewire/CrearTurnos.php',
+        'App\\Http\\Livewire\\EditarPaciente' => __DIR__ . '/../..' . '/app/Http/Livewire/EditarPaciente.php',
+        'App\\Http\\Livewire\\HistorialDeTurnos' => __DIR__ . '/../..' . '/app/Http/Livewire/HistorialDeTurnos.php',
+        'App\\Http\\Livewire\\ListarDoctores' => __DIR__ . '/../..' . '/app/Http/Livewire/ListarDoctores.php',
+        'App\\Http\\Livewire\\ListarPacientes' => __DIR__ . '/../..' . '/app/Http/Livewire/ListarPacientes.php',
+        'App\\Http\\Livewire\\ListarPrepagas' => __DIR__ . '/../..' . '/app/Http/Livewire/ListarPrepagas.php',
+        'App\\Http\\Livewire\\ListarTurnos' => __DIR__ . '/../..' . '/app/Http/Livewire/ListarTurnos.php',
+        'App\\Http\\Livewire\\MostrarAlerta' => __DIR__ . '/../..' . '/app/Http/Livewire/MostrarAlerta.php',
+        'App\\Http\\Livewire\\TurnosDeHoy' => __DIR__ . '/../..' . '/app/Http/Livewire/TurnosDeHoy.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
         'App\\Http\\Middleware\\PreventRequestsDuringMaintenance' => __DIR__ . '/../..' . '/app/Http/Middleware/PreventRequestsDuringMaintenance.php',
@@ -561,6 +589,15 @@ class ComposerStaticInitc2f1d92dfd207cc38d8e48f5f7414a52
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
         'App\\Http\\Requests\\Auth\\LoginRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Auth/LoginRequest.php',
         'App\\Http\\Requests\\ProfileUpdateRequest' => __DIR__ . '/../..' . '/app/Http/Requests/ProfileUpdateRequest.php',
+        'App\\Models\\City' => __DIR__ . '/../..' . '/app/Models/City.php',
+        'App\\Models\\Doctor' => __DIR__ . '/../..' . '/app/Models/Doctor.php',
+        'App\\Models\\Doctor_especialidad' => __DIR__ . '/../..' . '/app/Models/Doctor_especialidad.php',
+        'App\\Models\\Flag' => __DIR__ . '/../..' . '/app/Models/Flag.php',
+        'App\\Models\\Paciente' => __DIR__ . '/../..' . '/app/Models/Paciente.php',
+        'App\\Models\\Prepaga' => __DIR__ . '/../..' . '/app/Models/Prepaga.php',
+        'App\\Models\\Rol' => __DIR__ . '/../..' . '/app/Models/Rol.php',
+        'App\\Models\\Session_status' => __DIR__ . '/../..' . '/app/Models/Session_status.php',
+        'App\\Models\\Turno' => __DIR__ . '/../..' . '/app/Models/Turno.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
@@ -2803,6 +2840,8 @@ class ComposerStaticInitc2f1d92dfd207cc38d8e48f5f7414a52
         'Laravel\\Tinker\\Console\\TinkerCommand' => __DIR__ . '/..' . '/laravel/tinker/src/Console/TinkerCommand.php',
         'Laravel\\Tinker\\TinkerCaster' => __DIR__ . '/..' . '/laravel/tinker/src/TinkerCaster.php',
         'Laravel\\Tinker\\TinkerServiceProvider' => __DIR__ . '/..' . '/laravel/tinker/src/TinkerServiceProvider.php',
+        'Laraveles\\Spanish\\Commands\\InstallLang' => __DIR__ . '/..' . '/amendozaaguiar/laraveles-spanish-for-jetstream/src/Commands/InstallLang.php',
+        'Laraveles\\Spanish\\SpanishServiceProvider' => __DIR__ . '/..' . '/amendozaaguiar/laraveles-spanish-for-jetstream/src/SpanishServiceProvider.php',
         'League\\CommonMark\\CommonMarkConverter' => __DIR__ . '/..' . '/league/commonmark/src/CommonMarkConverter.php',
         'League\\CommonMark\\ConverterInterface' => __DIR__ . '/..' . '/league/commonmark/src/ConverterInterface.php',
         'League\\CommonMark\\Delimiter\\Delimiter' => __DIR__ . '/..' . '/league/commonmark/src/Delimiter/Delimiter.php',

@@ -1,8 +1,9 @@
-<x-perfect-scrollbar
+@auth
+    <x-perfect-scrollbar
     as="nav"
     aria-label="main"
     class="flex flex-col flex-1 gap-4 px-3"
->
+    >
 
     <x-sidebar.link
         title="Dashboard"
@@ -13,8 +14,8 @@
             <i class="fas fa-tachometer"></i>
         </x-slot>
     </x-sidebar.link>
-@if (Auth::user()->rol_id == 1)
-<x-sidebar.link
+    @if (Auth::user()->rol_id == 1)
+    <x-sidebar.link
         title="Pacientes"
         href="{{ route('pacientes.index') }}"
         :isActive="request()->routeIs('pacientes.index')"
@@ -54,8 +55,8 @@
         </x-slot>
     </x-sidebar.link>
 
-@elseif (Auth::user()->rol_id == 3)
-<x-sidebar.link
+    @elseif (Auth::user()->rol_id == 3)
+    <x-sidebar.link
         title="Historial de Turnos"
         href="{{route('paciente.historial')}}"
         :isActive="request()->routeIs('paciente.historial')"
@@ -64,6 +65,9 @@
             <i class="far fa-users-medical"></i>
         </x-slot>
     </x-sidebar.link>
-@endif
+    @endif
 
-</x-perfect-scrollbar>
+    </x-perfect-scrollbar>
+@endauth
+
+

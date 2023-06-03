@@ -12,9 +12,14 @@ class HistorialDeTurnos extends Component
     public function render()
     {
         return view('livewire.historial-de-turnos', [
-            'turnos' => DB::select('SELECT * FROM turnos WHERE paciente_id = (SELECT id FROM pacientes WHERE user_id = ?) ', [
-                Auth::user()->id,
-            ])
+            'turnos' => DB::select(
+                'SELECT turnos.*, turnos_estados.*, turnos_estados.estado AS estado
+            FROM turnos INNER JOIN turnos_estados ON turnos_estados.id = turnos.estado_id
+            WHERE paciente_id = (SELECT id FROM pacientes WHERE user_id = ?) ',
+                [
+                    Auth::user()->id,
+                ]
+            )
         ]);
     }
 }

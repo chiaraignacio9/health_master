@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
 class CrearDoctor extends Component
 {
@@ -26,6 +27,9 @@ class CrearDoctor extends Component
     public $localidades;
     public $especialidad_id;
 
+    public $image;
+
+    use WithFileUploads;
     protected $rules = [
         'nombre' => 'required',
         'apellido' => 'required',
@@ -36,7 +40,8 @@ class CrearDoctor extends Component
         'departamentoSeleccionado' => 'required',
         'localidad' => 'required',
         'email' => 'required|email',
-        'especialidad_id' => 'required'
+        'especialidad_id' => 'required',
+        'image' => 'image|max:1024'
     ];
 
     protected $messages = [
@@ -47,6 +52,9 @@ class CrearDoctor extends Component
     public function guardarDoctor()
     {
         $datos = $this->validate();
+
+        $image = $this->image->store('public/imagenes');
+        $path = str_replace('public/imagenes/', '', $image);
 
         $usuario = User::create([
             'nombre' => $datos['nombre'],
@@ -65,7 +73,8 @@ class CrearDoctor extends Component
 
         Doctor::create([
             'user_id' => $usuario->id,
-            'especialidad_id' => 1
+            'especialidad_id' => $this->especialidad_id,
+            'image_path' => $path
         ]);
 
         session()->flash('mensaje', 'Doctor creado exitosamente');

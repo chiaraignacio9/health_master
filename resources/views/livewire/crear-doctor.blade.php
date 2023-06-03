@@ -156,6 +156,27 @@
         </div>
     </div>
 
+    <div class="w-full">
+        <div>
+            <x-form.label for="image" :value="__('Imagen')" />
+            <x-form.input
+                id="image"
+                wire:model="image"
+                class="block mt-1 w-full"
+                type="file" name="image"
+                accept="image/*"
+                :value="old('image')"
+            />
+        </div>
+
+        <div class="my-5 w-48">
+            @if ($image)
+                Imagen:
+                <img src="{{ $image->temporaryUrl() }}" />
+            @endif
+        </div>
+    </div>
+
     <hr>
 
     <div class="text-center">

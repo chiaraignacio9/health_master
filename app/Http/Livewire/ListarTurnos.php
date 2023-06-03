@@ -26,7 +26,11 @@ class ListarTurnos extends Component
 
     public function actualizarDoctores()
     {
-        $response = DB::select('SELECT * FROM doctores INNER JOIN users ON users.rol_id = 2 WHERE doctores.especialidad_id = ?', [$this->especialidadSeleccionada]);
+        $response = DB::select(
+            'SELECT users.*,doctores.*, doctores.id AS doctor_id FROM doctores INNER JOIN users ON users.rol_id = 2
+        WHERE doctores.especialidad_id = ? AND users.id = doctores.user_id',
+            [$this->especialidadSeleccionada]
+        );
         $this->doctores = json_encode($response);
     }
 
@@ -35,7 +39,7 @@ class ListarTurnos extends Component
         if (Auth::user()->rol_id == 3) {
             $response = DB::select('SELECT * FROM turnos WHERE doctor_id = ? AND estado_id = 1', [$this->doctorSeleccionado]);
         } else if (Auth::user()->rol_id == 1) {
-            $response = DB::select('SELECT * FROM turnos WHERE doctor_id = ? AND estado_id = 1 OR estado_id = 2', [$this->doctorSeleccionado]);
+            $response = DB::select('SELECT * FROM turnos WHERE doctor_id = ? AND (estado_id = 1 OR estado_id = 2)', [$this->doctorSeleccionado]);
         }
 
         $this->turnos = json_encode($response);

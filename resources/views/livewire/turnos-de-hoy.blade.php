@@ -13,10 +13,10 @@
         <div class="p-6 text-gray-900 border-b md:flex md:justify-between md:items-center">
             <div class="leading-10">
                 <a href="" class="text-xl font-bold">
-                    Fecha: {{$turno->fecha}} - Hora:{{$turno->hora}}
+                    {{ $turno->nombre . ' ' . $turno->apellido}} - Hora:{{$turno->hora}}
                 </a>
                 <p class="text-sm text-gray-500 ">
-                    {{ $turno->estado }}
+
                 </p>
             </div>
 
@@ -29,7 +29,7 @@
         </div>
 
         @empty
-            <p class="pt-3 text-center text-gray-600">No hay turnos para mostrar</p>
+            <p class="pt-3 text-center text-gray-600">No hay turnos pendientes para el día de hoy</p>
         @endforelse
     </div>
 </div>

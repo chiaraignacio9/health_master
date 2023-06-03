@@ -29,6 +29,8 @@
             />
         </x-button>
     </div>
+@auth
+
 
     <div class="flex items-center gap-3">
         <x-dropdown align="right" width="48">
@@ -76,6 +78,7 @@
             </x-slot>
         </x-dropdown>
     </div>
+    @endauth
 </nav>
 
 <!-- Mobile bottom bar -->

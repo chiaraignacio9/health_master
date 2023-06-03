@@ -25,7 +25,7 @@
     </x-slot>
 
     <div class="p-6 overflow-hidden bg-white rounded-md shadow-md dark:bg-dark-eval-1">
-        Bievenido {{ Auth::user()->nombre }}
+        Bievenid@ {{ Auth::user()->nombre }}
     </div>
 
 
@@ -35,5 +35,10 @@
         @endif
     </div>
 
+    <div class="p-6 overflow-hidden bg-white rounded-md shadow-md dark:bg-dark-eval-1">
+        @if (Auth::user()->rol_id == 2)
+            @livewire('turnos-de-hoy')
+        @endif
+    </div>
 
 </x-app-layout>

@@ -14,7 +14,8 @@ class Doctor extends Model
 
     protected $fillable = [
         'user_id',
-        'especialidad_id'
+        'especialidad_id',
+        'image_path'
     ];
 
     public function getUserData()

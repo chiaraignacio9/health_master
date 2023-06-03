@@ -8,8 +8,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RolController;
 use App\Http\Controllers\TurnosController;
-use App\Http\Controllers\Users;
-use App\Http\Controllers\UsersController;
+use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +22,12 @@ use App\Http\Controllers\UsersController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome', [
+        'doctores' => DB::select('SELECT doctores.*, users.*, doctor_especialidades.nombre AS especialidad FROM doctores
+                                INNER JOIN users ON users.id = doctores.user_id
+                                INNER JOIN doctor_especialidades ON doctores.especialidad_id = doctor_especialidades.id
+                                ')
+    ]);
 });
 
 Route::get('/dashboard', function () {

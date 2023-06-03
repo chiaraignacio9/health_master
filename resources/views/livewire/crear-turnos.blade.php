@@ -33,7 +33,7 @@
                 var_dump($doctores);
             @endphp
                 @foreach ($doctoresDatos as $doctor)
-                    <option value="{{$doctor['id']}}">{{$doctor['nombre'] . ' ' . $doctor['apellido']}}</option>
+                    <option value="{{$doctor['doctor_id']}}">{{$doctor['nombre'] . ' ' . $doctor['apellido']}}</option>
                 @endforeach
             @endif
             </select>
@@ -43,27 +43,27 @@
     <div>
         <x-form.label for="dias" :value="__('Dias')" />
         <label>
-            <input type="checkbox" wire:model="diasSeleccionados.sunday">
+            <input type="checkbox" wire:model="diasSeleccionados.monday">
             Lunes
         </label>
 
         <label>
-            <input type="checkbox" wire:model="diasSeleccionados.martes">
+            <input type="checkbox" wire:model="diasSeleccionados.tuesday">
             Martes
         </label>
 
         <label>
-            <input type="checkbox" wire:model="diasSeleccionados.miercoles">
+            <input type="checkbox" wire:model="diasSeleccionados.wednesday">
             Miércoles
         </label>
 
         <label>
-            <input type="checkbox" wire:model="diasSeleccionados.jueves">
+            <input type="checkbox" wire:model="diasSeleccionados.thursday">
             Jueves
         </label>
 
         <label>
-            <input type="checkbox" wire:model="diasSeleccionados.viernes">
+            <input type="checkbox" wire:model="diasSeleccionados.friday">
             Viernes
         </label>
     </div>
