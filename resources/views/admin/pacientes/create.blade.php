@@ -8,6 +8,6 @@
     </x-slot>
 
     <div class="p-6 overflow-hidden bg-white rounded-md shadow-md dark:bg-dark-eval-1">
-        @livewire('crear-paciente')
+        @livewire('pacientes.crear-paciente')
     </div>
 </x-app-layout>

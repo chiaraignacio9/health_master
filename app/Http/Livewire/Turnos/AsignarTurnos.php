@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Turnos;
 
 use App\Models\Paciente;
 use App\Models\Turno;
@@ -20,7 +20,7 @@ class AsignarTurnos extends Component
     public $datosPaciente;
     public function render()
     {
-        return view('livewire.asignar-turnos');
+        return view('livewire.turnos.asignar-turnos');
     }
 
     public function mount($turno)

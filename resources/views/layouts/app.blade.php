@@ -34,11 +34,9 @@
     >
         <div class="min-h-screen text-gray-900 bg-gray-100 dark:bg-dark-eval-0 dark:text-gray-200">
             @auth
-                <!-- Sidebar -->
-                <x-sidebar.sidebar />
-
-                <!-- Page Wrapper -->
-                <div
+            @if (!request()->routeIs('welcome'))
+            <x-sidebar.sidebar />
+            <div
                     class="flex flex-col min-h-screen"
                     :class="{
                         'lg:ml-64': isSidebarOpen,
@@ -46,6 +44,7 @@
                     }"
                     style="transition-property: margin; transition-duration: 150ms;"
                 >
+            @endif
             @endauth
             @if (isset($header))
                 <!-- Navbar -->
@@ -72,6 +71,6 @@
         </div>
     </div>
     @livewireScripts
-
+    @stack('sweetalert')
 </body>
 </html>

@@ -31,13 +31,13 @@
 
     <div class="p-6 overflow-hidden bg-white rounded-md shadow-md dark:bg-dark-eval-1">
         @if (Auth::user()->rol_id == 3)
-            @livewire('listar-turnos')
+            @livewire('turnos.listar-turnos')
         @endif
     </div>
 
     <div class="p-6 overflow-hidden bg-white rounded-md shadow-md dark:bg-dark-eval-1">
         @if (Auth::user()->rol_id == 2)
-            @livewire('turnos-de-hoy')
+            @livewire('turnos.turnos-de-hoy')
         @endif
     </div>
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Turnos;
 
 use App\Models\Doctor_especialidad;
 use App\Models\Paciente;
@@ -19,7 +19,7 @@ class ListarTurnos extends Component
 
     public function render()
     {
-        return view('livewire.listar-turnos', [
+        return view('livewire.turnos.listar-turnos', [
             'especialidades' => Doctor_especialidad::all()
         ]);
     }
@@ -36,10 +36,31 @@ class ListarTurnos extends Component
 
     public function actualizarTurnos()
     {
+
+        $fechaHoy = date('Y-m-d');
+
         if (Auth::user()->rol_id == 3) {
-            $response = DB::select('SELECT * FROM turnos WHERE doctor_id = ? AND estado_id = 1', [$this->doctorSeleccionado]);
+            $response = DB::select(
+                'SELECT * FROM turnos
+                                WHERE doctor_id = ?
+                                AND estado_id = 1
+                                AND fecha >= ?',
+                [
+                    $this->doctorSeleccionado,
+                    $fechaHoy
+                ]
+            );
         } else if (Auth::user()->rol_id == 1) {
-            $response = DB::select('SELECT * FROM turnos WHERE doctor_id = ? AND (estado_id = 1 OR estado_id = 2)', [$this->doctorSeleccionado]);
+            $response = DB::select(
+                'SELECT * FROM turnos
+                                    WHERE doctor_id = ?
+                                    AND (estado_id = 1 OR estado_id = 2)
+                                    AND fecha >= ?',
+                [
+                    $this->doctorSeleccionado,
+                    $fechaHoy
+                ]
+            );
         }
 
         $this->turnos = json_encode($response);

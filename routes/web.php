@@ -28,7 +28,7 @@ Route::get('/', function () {
                                 INNER JOIN doctor_especialidades ON doctores.especialidad_id = doctor_especialidades.id
                                 ')
     ]);
-});
+})->name('welcome');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -55,12 +55,16 @@ Route::get('/buttons/text-icon', function () {
 })->middleware(['auth'])->name('buttons.text-icon');
 
 Route::prefix('/admin')->group(function () {
-    Route::resource('pacientes', PacientesController::class);
-    Route::resource('doctores', DoctoresController::class);
-    Route::resource('prepagas', PrepagasController::class);
-    Route::resource('turnos', TurnosController::class);
-})->middleware('auth');
+    Route::resource('pacientes', PacientesController::class)->middleware('auth');
+    Route::get('paciente/eliminados', [PacientesController::class, 'eliminados'])->middleware(['auth'])->name('pacientes.eliminados');
+    Route::resource('doctores', DoctoresController::class)->middleware('auth');
+    Route::get('doctores/eliminados', [DoctoresController::class, 'eliminados'])->middleware(['auth'])->name('doctores.eliminados');
+    Route::resource('prepagas', PrepagasController::class)->middleware('auth');
+    Route::resource('turnos', TurnosController::class)->middleware('auth');
+});
 
-Route::get('/historial', [PacientesController::class, 'verHistorial'])->name('paciente.historial')->middleware('auth');
+Route::get('/historial', [PacientesController::class, 'verHistorial'])->name('paciente.historial')->middleware(['auth', 'paciente']);
+
+Route::get('/admin/prepagas/eliminadas', [PrepagasController::class, 'create'])->name('prepaga.demo');
 
 require __DIR__ . '/auth.php';

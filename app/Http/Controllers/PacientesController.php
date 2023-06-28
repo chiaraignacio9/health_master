@@ -16,6 +16,11 @@ class PacientesController extends Controller
         return view('admin.pacientes.index');
     }
 
+    public function eliminados()
+    {
+        return view('admin.pacientes.eliminados');
+    }
+
     /**
      * Show the form for creating a new resource.
      */

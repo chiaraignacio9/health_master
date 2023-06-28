@@ -32,6 +32,14 @@ class TurnosController extends Controller
         //
     }
 
+
+    public function view(string $id)
+    {
+        return view('admin.turnos.view', [
+            'turno' => json_encode(DB::selectOne('SELECT * FROM turnos WHERE id = ?', [$id]), true)
+        ]);
+    }
+
     /**
      * Display the specified resource.
      */
@@ -48,6 +56,9 @@ class TurnosController extends Controller
     public function edit(string $id)
     {
         //
+        return view('turnos.edit', [
+            'turno' => DB::selectOne('SELECT * FROM turnos WHERE id = ?', [$id])
+        ]);
     }
 
     /**

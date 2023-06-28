@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Turnos;
 
 use App\Models\Doctor_especialidad;
 use App\Models\Turno;
@@ -25,7 +25,7 @@ class CrearTurnos extends Component
     ];
     public function render()
     {
-        return view('livewire.crear-turnos', [
+        return view('livewire.turnos.crear-turnos', [
             'especialidades' => Doctor_especialidad::all()
         ]);
     }

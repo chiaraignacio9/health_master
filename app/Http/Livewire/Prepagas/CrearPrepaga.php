@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Prepagas;
 
 use App\Models\Prepaga;
 use Livewire\Component;
@@ -18,7 +18,7 @@ class CrearPrepaga extends Component
     ];
     public function render()
     {
-        return view('livewire.crear-prepaga');
+        return view('livewire.prepagas.crear-prepaga');
     }
 
     public function guardarPrepaga()

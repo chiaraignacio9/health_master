@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DoctoresController extends Controller
 {
@@ -12,6 +13,11 @@ class DoctoresController extends Controller
     public function index()
     {
         return view('admin.doctores.index');
+    }
+
+    public function eliminados()
+    {
+        return view('admin.doctores.eliminados');
     }
 
     /**
@@ -35,7 +41,6 @@ class DoctoresController extends Controller
      */
     public function show(string $id)
     {
-        //
     }
 
     /**
@@ -43,7 +48,11 @@ class DoctoresController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('admin.doctores.edit', [
+            'doctor' => json_encode(DB::selectOne('SELECT *, doctores.id AS doctor_id
+            FROM doctores INNER JOIN users ON users.id = doctores.user_id
+            WHERE doctores.id = ?', [$id]), true)
+        ]);
     }
 
     /**

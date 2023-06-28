@@ -1,23 +1,28 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Pacientes;
 
-use App\Models\Doctor;
-use App\Models\Doctor_especialidad;
+use App\Models\City;
+use App\Models\Health_insurance;
+use App\Models\Paciente;
+use App\Models\Prepaga;
 use App\Models\User;
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
 use Livewire\Component;
-use Livewire\WithFileUploads;
 
-class CrearDoctor extends Component
+class CrearPaciente extends Component
 {
+
     public $nombre;
     public $apellido;
     public $direccion;
     public $dni;
     public $nacimiento;
     public $email;
+    public $id_prepaga;
+    public $numero_afiliado;
     public $localidad;
 
     public $provincias;
@@ -25,11 +30,7 @@ class CrearDoctor extends Component
     public $departamentoSeleccionado;
     public $departamentos;
     public $localidades;
-    public $especialidad_id;
 
-    public $image;
-
-    use WithFileUploads;
     protected $rules = [
         'nombre' => 'required',
         'apellido' => 'required',
@@ -39,9 +40,7 @@ class CrearDoctor extends Component
         'provinciaSeleccionada' => 'required',
         'departamentoSeleccionado' => 'required',
         'localidad' => 'required',
-        'email' => 'required|email',
-        'especialidad_id' => 'required',
-        'image' => 'image|max:1024'
+        'email' => 'required|email'
     ];
 
     protected $messages = [
@@ -49,12 +48,9 @@ class CrearDoctor extends Component
         'apellido.required' => 'El apellido es obligatorio'
     ];
 
-    public function guardarDoctor()
+    public function storePatient()
     {
         $datos = $this->validate();
-
-        $image = $this->image->store('public/imagenes');
-        $path = str_replace('public/imagenes/', '', $image);
 
         $usuario = User::create([
             'nombre' => $datos['nombre'],
@@ -67,23 +63,26 @@ class CrearDoctor extends Component
             'localidad_id' => $datos['localidad'],
             'email' => $datos['email'],
             'password' => Hash::make($datos['dni']),
-            'rol_id' => 2,
+            'rol_id' => 3,
             'flag_id' => 1,
         ]);
 
-        Doctor::create([
+        Paciente::create([
             'user_id' => $usuario->id,
-            'especialidad_id' => $this->especialidad_id,
-            'image_path' => $path
+            'prepaga_id' => 1,
+            'numero_afiliado' => 1
         ]);
 
-        session()->flash('mensaje', 'Doctor creado exitosamente');
-        return redirect()->route('doctores.index');
+        session()->flash('mensaje', 'Paciente creado exitosamente');
+        return redirect()->route('pacientes.index');
     }
+
+
+
     public function render()
     {
-        return view('livewire.crear-doctor', [
-            'especialidades' => Doctor_especialidad::all()
+        return view('livewire.pacientes.crear-paciente', [
+            'prepagas' => Prepaga::all()
         ]);
     }
 

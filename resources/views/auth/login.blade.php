@@ -14,7 +14,7 @@
                 <div class="space-y-2">
                     <x-form.label
                         for="email"
-                        :value="__('Email')"
+                        :value="__('Número de documento')"
                     />
 
                     <x-form.input-with-icon-wrapper>
@@ -29,7 +29,7 @@
                             type="text"
                             name="dni"
                             :value="old('email')"
-                            placeholder="{{ __('Email') }}"
+                            placeholder="{{ __('Número de documento') }}"
                             required
                             autofocus
                         />

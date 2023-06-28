@@ -1,14 +1,14 @@
-<form class="w-full space-y-5" autocomplete="off" wire:submit.prevent="actualizarPaciente">
+<form class="w-full space-y-5" autocomplete="off" wire:submit.prevent="actualizarDoctor">
     <div class="w-full flex gap-2">
         <div class="w-1/2">
-            <x-form.label for="firstname" :value="__('Nombre del paciente')" />
+            <x-form.label for="nombre" :value="__('Nombre del doctor')" />
             <x-form.input
                 id="nombre"
                 wire:model="nombre"
                 class="block mt-1 w-full"
                 type="text" name="nombre"
                 :value="old('nombre')"
-                placeholder="Nombre del paciente"
+                placeholder="Nombre del doctor"
             />
 
             @error('nombre')
@@ -17,16 +17,30 @@
 
         </div>
         <div class="w-1/2">
-            <x-form.label for="apellido" :value="__('Apellido del paciente')" />
+            <x-form.label for="apellido" :value="__('Apellido del doctor')" />
             <x-form.input
                 id="apellido"
                 wire:model="apellido"
                 class="block mt-1 w-full"
                 type="text" name="apellido"
                 :value="old('apellido')"
-                placeholder="Apellido del paciente"
+                placeholder="Apellido del doctor"
             />
             @error('apellido')
+                <livewire:mostrar-alerta :message="$message">
+            @enderror
+        </div>
+    </div>
+
+    <div class="w-full">
+        <div>
+            <select class="w-full text-center" wire:model="especialidad_id" id="especialidad_id">
+                <option>-- Seleccione una especialidad --</option>
+                @foreach ($especialidades as $especialidad)
+                    <option value="{{$especialidad->id}}">{{$especialidad->nombre}}</option>
+                @endforeach
+            </select>
+            @error('especialidad_id')
                 <livewire:mostrar-alerta :message="$message">
             @enderror
         </div>
@@ -74,34 +88,11 @@
                 class="block mt-1 w-full"
                 type="text" name="dni"
                 :value="old('dni')"
-                placeholder="DNI del paciente"
+                placeholder="DNI del doctor"
             />
             @error('dni')
                 <livewire:mostrar-alerta :message="$message">
             @enderror
-        </div>
-    </div>
-
-    <div class="w-full flex gap-2">
-        <div class="w-1/2">
-            <x-form.label for="id_prepaga" :value="__('Obra social')" />
-            <select class="w-full text-center " wire:model="id_prepaga" name="id_prepaga" id="id_prepaga">
-                <option>-- No posee obra social --</option>
-                @foreach ($prepagas as $prepaga)
-                    <option value="{{$prepaga->id}}">{{$prepaga->nombre}}</option>
-                @endforeach
-            </select>
-        </div>
-        <div class="w-1/2">
-            <x-form.label for="numero_afiliado" :value="__('Número de Afiliado')" />
-            <x-form.input
-                id="numero_afiliado"
-                wire:model="numero_afiliado"
-                class="block mt-1 w-full"
-                type="text" name="numero_afiliado"
-                :value="old('numero_afiliado')"
-                placeholder="Número de afiliado"
-            />
         </div>
     </div>
 
@@ -114,6 +105,9 @@
                     <option class="uppercase" value="{{$provincia['id']}}">{{$provincia['nombre']}}</option>
                 @endforeach
             </select>
+            @error('provinciaSeleccionada')
+                <livewire:mostrar-alerta :message="$message">
+            @enderror
         </div>
         <div class="w-1/2">
                 <x-form.label for="departamento" :value="__('Departamento')" />
@@ -125,7 +119,7 @@
                     @endforeach
                 @endif
             </select>
-            @error('cityid')
+            @error('departamentoSeleccionado')
                 <livewire:mostrar-alerta :message="$message">
             @enderror
         </div>
@@ -142,9 +136,12 @@
                     @endforeach
                 @endif
             </select>
+            @error('localidad')
+                <livewire:mostrar-alerta :message="$message">
+            @enderror
         </div>
         <div class="w-1/2">
-                <x-form.label for="cityid" :value="__('Direccion')" />
+                <x-form.label for="direccion" :value="__('Direccion')" />
                 <x-form.input
                 id="direccion"
                 wire:model="direccion"
@@ -153,15 +150,57 @@
                 :value="old('direccion')"
                 placeholder="Direccion"
             />
-            @error('cityid')
+            @error('direccion')
                 <livewire:mostrar-alerta :message="$message">
             @enderror
+        </div>
+    </div>
+
+    <div class="w-full">
+        <div>
+            <x-form.label for="image" :value="__('Imagen')" />
+            <x-form.input
+                id="image"
+                wire:model="image"
+                class="block mt-1 w-full"
+                type="file" name="image"
+                accept="image/*"
+                :value="old('image')"
+            />
+        </div>
+
+        <div class="my-5 w-48">
+            @if ($image)
+                Imagen:
+                <img src="{{ $image->temporaryUrl() }}" />
+            @elseif ($prevImage)
+                <img src="{{ asset('storage/imagenes/' . $prevImage) }}" alt="">
+            @endif
         </div>
     </div>
 
     <hr>
 
     <div class="text-center">
-        <input class="py-2 px-3 bg-green-400 rounded font-semibold" type="submit" value="Actualizar Paciente">
+        <button class="py-2 px-3 bg-green-400 rounded font-semibold hover:bg-green-700 cursor-pointer" type="submit">
+            Actualizar doctor
+        </button>
     </div>
 </form>
+
+@push('sweetalert')
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+        <script>
+            window.addEventListener('alerta', function(){
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Doctor editado con éxito',
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = ' {{ route('doctores.index') }} ';
+                    }
+                });
+            })
+        </script>
+@endpush

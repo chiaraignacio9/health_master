@@ -4,6 +4,7 @@
         <div class="w-1/2">
             <x-form.label for="nombre" :value="__('Fecha del turno')" />
             <x-form.input
+                readonly
                 id="fecha"
                 wire:model="fecha"
                 class="block mt-1 w-full"
@@ -14,6 +15,7 @@
         <div class="w-1/2">
             <x-form.label for="descuento" :value="__('Hora')" />
             <x-form.input
+            readonly
             id="hora"
             wire:model="hora"
             class="block mt-1 w-full"
@@ -22,8 +24,6 @@
             />
         </div>
     </div>
-
-
     <div class="w-full flex gap-2">
         <div class="w-1/2">
             <x-form.label for="dni" :value="__('DNI del paciente')" />

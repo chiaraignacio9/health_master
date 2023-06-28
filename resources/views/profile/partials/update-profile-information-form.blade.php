@@ -1,11 +1,11 @@
 <section>
     <header>
         <h2 class="text-lg font-medium">
-            {{ __('Profile Information') }}
+            {{ __('Información de contacto') }}
         </h2>
 
         <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-            {{ __("Update your account's profile information and email address.") }}
+            {{ __("Actualice su correo electronico") }}
         </p>
     </header>
 
@@ -20,26 +20,6 @@
     >
         @csrf
         @method('patch')
-
-        <div class="space-y-2">
-            <x-form.label
-                for="name"
-                :value="__('Name')"
-            />
-
-            <x-form.input
-                id="name"
-                name="name"
-                type="text"
-                class="block w-full"
-                :value="old('name', $user->name)"
-                required
-                autofocus
-                autocomplete="name"
-            />
-
-            <x-form.error :messages="$errors->get('name')" />
-        </div>
 
         <div class="space-y-2">
             <x-form.label

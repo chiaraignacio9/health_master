@@ -46,10 +46,13 @@
                     $turnosDatos = json_decode($turnos, true);
                 @endphp
                 @forelse ($turnosDatos as $turno)
+                @php
+                    $diaSemana = Carbon\Carbon::parse($turno['fecha'])->locale('es')->dayName;
+                @endphp
                 <div class="p-6 text-gray-900 border-b md:flex md:justify-between md:items-center">
                     <div class="leading-10">
                         <a href="" class="text-base font-bold">
-                            Fecha: {{ $turno['fecha'] }} - Hora: {{ $turno['hora'] }}
+                            {{ $diaSemana }} - {{ date('d \d\e F', strtotime($turno['fecha'])) }} - Hora: {{ $turno['hora'] }}
                         </a>
                         <p class="text-sm text-gray-500 ">
 
@@ -59,7 +62,7 @@
                     <div class="flex flex-col items-stretch md:flex-row gap-3 text-center mt-5 md:mt-0">
                         @if ($turno['estado_id'] == 2)
                             <a
-                                href=""
+                                href="{{route('turnos.show', ['turno' => $turno['id'] ])}}"
                                 class="bg-yellow-400 py-2 px-4 roundedz text-black text-xs font-bold uppercase"
                             >Ver paciente asignado</a>
                         @elseif ($turno['estado_id'] == 1)

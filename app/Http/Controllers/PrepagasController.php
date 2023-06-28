@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PrepagasController extends Controller
 {
@@ -12,6 +13,12 @@ class PrepagasController extends Controller
     public function index()
     {
         return view('admin.prepagas.index');
+    }
+
+    public function prepagasEliminadas()
+    {
+        dd('aaa');
+        return view('admin.prepagas.eliminadas');
     }
 
     /**
@@ -43,7 +50,9 @@ class PrepagasController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        return view('admin.prepagas.edit', [
+            'prepaga' => json_encode(DB::select("SELECT * FROM prepagas WHERE id = ?", [$id]))
+        ]);
     }
 
     /**

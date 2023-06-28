@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\Doctores;
 
-use App\Models\Paciente;
-use App\Models\Prepaga;
+use App\Models\Doctor;
+use App\Models\Doctor_especialidad;
 use App\Models\User;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
 use Livewire\Component;
+use Livewire\WithFileUploads;
 
-class EditarPaciente extends Component
+class CrearDoctor extends Component
 {
     public $nombre;
     public $apellido;
@@ -18,8 +18,6 @@ class EditarPaciente extends Component
     public $dni;
     public $nacimiento;
     public $email;
-    public $id_prepaga;
-    public $numero_afiliado;
     public $localidad;
 
     public $provincias;
@@ -27,8 +25,11 @@ class EditarPaciente extends Component
     public $departamentoSeleccionado;
     public $departamentos;
     public $localidades;
-    public $datos;
-    public $user_id;
+    public $especialidad_id;
+
+    public $image;
+
+    use WithFileUploads;
     protected $rules = [
         'nombre' => 'required',
         'apellido' => 'required',
@@ -38,84 +39,57 @@ class EditarPaciente extends Component
         'provinciaSeleccionada' => 'required',
         'departamentoSeleccionado' => 'required',
         'localidad' => 'required',
-        'email' => 'required|email'
+        'email' => 'required|email',
+        'especialidad_id' => 'required',
+        'image' => 'image|max:1024'
     ];
 
     protected $messages = [
         'nombre.required' => 'El nombre es obligatorio',
         'apellido.required' => 'El apellido es obligatorio'
     ];
-    public function render()
-    {
-        return view('livewire.editar-paciente', [
-            'prepagas' => Prepaga::all()
-        ]);
-    }
 
-    public function actualizarPaciente()
+    public function guardarDoctor()
     {
         $datos = $this->validate();
-        DB::update(
-            'UPDATE users SET
-                nombre = ?,
-                apellido = ?,
-                direccion = ?,
-                dni = ?,
-                nacimiento = ?,
-                provincia_id = ?,
-                departamento_id = ?,
-                localidad_id = ?,
-                email = ?,
-                password = ?,
-                updated_at = ?
-                WHERE users.id = ?
-            ',
-            [
-                $datos['nombre'],
-                $datos['apellido'],
-                $datos['direccion'],
-                $datos['dni'],
-                $datos['nacimiento'],
-                $datos['provinciaSeleccionada'],
-                $datos['departamentoSeleccionado'],
-                $datos['localidad'],
-                $datos['email'],
-                Hash::make($datos['dni']),
-                date('Y-m-d H:i:s'),
-                $this->datos['user_id']
-            ]
-        );
 
-        DB::update('UPDATE pacientes SET
-        prepaga_id = ?, numero_afiliado = ?
-        WHERE id = ?', [
-            $this->id_prepaga,
-            $this->numero_afiliado,
-            $this->datos['paciente_id']
+        $image = $this->image->store('public/imagenes');
+        $path = str_replace('public/imagenes/', '', $image);
+
+        $usuario = User::create([
+            'nombre' => $datos['nombre'],
+            'apellido' => $datos['apellido'],
+            'direccion' => $datos['direccion'],
+            'dni' => $datos['dni'],
+            'nacimiento' => $datos['nacimiento'],
+            'provincia_id' => $datos['provinciaSeleccionada'],
+            'departamento_id' => $datos['departamentoSeleccionado'],
+            'localidad_id' => $datos['localidad'],
+            'email' => $datos['email'],
+            'password' => Hash::make($datos['dni']),
+            'rol_id' => 2,
+            'flag_id' => 1,
         ]);
 
-        session()->flash('mensaje', 'Paciente editado exitosamente');
-        return redirect()->route('pacientes.index');
+        Doctor::create([
+            'user_id' => $usuario->id,
+            'especialidad_id' => $this->especialidad_id,
+            'image_path' => $path
+        ]);
+
+        session()->flash('mensaje', 'Doctor creado exitosamente');
+        return redirect()->route('doctores.index');
+    }
+    public function render()
+    {
+        return view('livewire.doctores.crear-doctor', [
+            'especialidades' => Doctor_especialidad::all()
+        ]);
     }
 
-    public function mount($paciente)
+    public function mount()
     {
         $this->provincias = $this->obtenerProvincias();
-
-        $this->datos = json_decode($paciente, true);
-        $this->nombre = $this->datos['nombre'];
-        $this->apellido = $this->datos['apellido'];
-        $this->email = $this->datos['email'];
-        $this->dni = $this->datos['dni'];
-        $this->nacimiento = $this->datos['nacimiento'];
-        $this->id_prepaga = $this->datos['prepaga_id'];
-        $this->numero_afiliado = $this->datos['numero_afiliado'];
-        $this->provinciaSeleccionada = $this->datos['provincia_id'];
-        $this->departamentoSeleccionado = $this->datos['departamento_id'];
-        $this->actualizarDepartamentos();
-        $this->localidad = $this->datos['localidad_id'];
-        $this->actualizarLocalidades();
-        $this->direccion = $this->datos['direccion'];
     }
 
     public function obtenerProvincias()
